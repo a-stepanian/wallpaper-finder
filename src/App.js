@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { createApi } from "unsplash-js";
-import Navbar from "./Navbar";
-import Carousel from "./Carousel";
-import Loading from "./Loading";
+import Form from "./Form";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
   const [photos, setPhotos] = useState([]);
+  const [orientation, setOrientation] = useState("portrait");
 
   const unsplash = createApi({
     accessKey: process.env.REACT_APP_UNSPLASH,
@@ -15,9 +14,9 @@ function App() {
 
   const getPhoto = async () => {
     const response = await unsplash.search.getPhotos({
-      query: searchTerm,
+      query: search,
       perPage: 30,
-      orientation: "squarish",
+      orientation,
     });
     const photoArray = response.response.results;
     const newPhotoArray = photoArray.map((photo) => {
@@ -50,13 +49,16 @@ function App() {
 
   return (
     <>
-      <Navbar
-        handleSubmit={handleSubmit}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
-      {loading && <Loading />}
-      {photos.length > 0 && <Carousel photos={photos} />}
+      <h1>Fresh Wallpaper</h1>
+      <main>
+        <Form
+          search={search}
+          setSearch={setSearch}
+          handleSubmit={handleSubmit}
+          orientation={orientation}
+          setOrientation={setOrientation}
+        />
+      </main>
     </>
   );
 }
