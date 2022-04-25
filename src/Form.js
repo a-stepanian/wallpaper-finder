@@ -1,24 +1,30 @@
 import React from "react";
 
-const Form = ({ handleSubmit, setOrientation, orientation, search }) => {
+const Form = ({
+  handleSubmit,
+  setSearch,
+  setOrientation,
+  orientation,
+  search,
+}) => {
   return (
     <>
       <div className="orientation">
         <button
           onClick={() => setOrientation("portrait")}
-          className={orientation === "portrait" && "selected"}
+          className={orientation === "portrait" ? "selected" : null}
         >
           portrait
         </button>
         <button
           onClick={() => setOrientation("landscape")}
-          className={orientation === "landscape" && "selected"}
+          className={orientation === "landscape" ? "selected" : null}
         >
           landscape
         </button>
       </div>
 
-      <form onSubmit={(e) => handleSubmit}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="search"></label>
         <input
           type="text"
@@ -27,7 +33,7 @@ const Form = ({ handleSubmit, setOrientation, orientation, search }) => {
           autoComplete="off"
           value={search}
           onChange={(e) => {
-            console.log(e.target.value);
+            setSearch(e.target.value);
           }}
         />
 
