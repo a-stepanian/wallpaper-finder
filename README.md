@@ -1,3 +1,13 @@
-# Check out the website in action:
+# About Wallpaper Finder
 
-https://a-stepanian.github.io/wallpaper-finder/
+## Website
+
+Check out the website:
+
+https://wallpaper-finder.herokuapp.com/
+
+## Screenshots
+
+### Small Screens
+
+### Large Screens
