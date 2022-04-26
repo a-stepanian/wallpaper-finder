@@ -1,19 +1,30 @@
 import React from "react";
 
-const Photos = ({ photos }) => {
+const Photos = ({ photos, setSelectedPhoto, setBigPic }) => {
+  const handleClick = (photo) => {
+    setSelectedPhoto(photo);
+    setBigPic(true);
+  };
   return (
     <section>
       {photos.map((photo, index) => {
         return (
-          <article className="image-card">
-            <img src={photo.small} alt={photo.name} key={index} />
+          <button
+            className="image-card"
+            key={index}
+            style={{
+              backgroundColor: `${photo.color}`,
+            }}
+            onClick={() => handleClick(photo)}
+          >
+            <img src={photo.small} alt={photo.name} />
             <div
               className="likes"
               style={{ backgroundColor: `${photo.color}` }}
             >
-              &#9825; {photo.likes}
+              <span className="heart">&#9825;</span> {photo.likes}
             </div>
-          </article>
+          </button>
         );
       })}
     </section>
