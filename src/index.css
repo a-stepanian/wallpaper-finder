@@ -35,7 +35,7 @@ input{
   background-color: rgb(196, 196, 219);
   font-size: 1.6rem;
   border: none;
-  padding: 5px 15px;
+  padding: 0 15px;
   border-radius: 5px 0 0 5px;
   color: rgb(10, 10, 20)
 }
@@ -43,15 +43,16 @@ input:focus {
   outline: none;
   background-color: rgb(230, 212, 187);
 }
-form button {
-  border-radius: 0 5px 5px 0;
-}
+
 button{
   background-color: rgb(29, 29, 64);
   font-size: 1.6rem;
   border: none;
   padding: 5px 15px;
-  transition: 0.2s;
+}
+form button {
+  border-radius: 0 5px 5px 0;
+  padding: 0 15px;
 }
 button:hover {
   cursor: pointer;
@@ -87,10 +88,10 @@ button:hover {
 section {
 margin-top: 80px;
 width: 98%;
-height: calc(100vh - 300px);
+height: calc(100vh - 250px);
 display: flex;
 overflow-x: auto;
-position: relative;
+position: fixed;
 }
 
 section::-webkit-scrollbar {
@@ -118,6 +119,7 @@ section::-webkit-scrollbar-thumb {
   font-size: 1rem;
   border: none;
   padding: 0;
+  width: min-content;
 }
 .image-card:hover {
   box-shadow: none;
@@ -130,20 +132,19 @@ section::-webkit-scrollbar-thumb {
   height: 100%;
   border-radius: 5px;
   transform: scale(0.95);
-  transition: 0.2s;
+  transition: 0.3s;
   }
 
 .likes {
   line-height: 20px;
   width: 60px;
-  border: 2px solid rgba(196, 196, 219, 0.1);
   color: black;
   text-align: center;
   font-weight: 500;
   border-radius: 3px;
   position: absolute;
-  bottom: 8px;
-  left: 8px;
+  bottom: 3px;
+  left: 3px;
 }
 .heart {
   color: black;
@@ -180,9 +181,27 @@ section::-webkit-scrollbar-thumb {
 }
 
 @media (min-width: 768px) {
+  .orientation {
+    height: 40px;
+    bottom: none;
+    top: 10px;
+    right: 300px;
+  }
+  .orientation button {
+    width: 80px;
+  }
+  form {
+    height: 40px;
+    bottom: none;
+    top: 9.5px;
+    right: 5px;
+  }
+  form input {
+    margin-top: 0;
+  }
   section {
-    margin-top: 80px;
-    height: calc(100vh - 250px);
+    margin-top: 100px;
+    height: calc(100vh - 140px);
   }
   .image-card {
     margin: 30px 30px;
