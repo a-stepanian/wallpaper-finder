@@ -2,7 +2,6 @@ import React from "react";
 
 const Enlarged = ({ selectedPhoto, setBigPic }) => {
   const backcolor = selectedPhoto.color + "dd";
-  console.log(backcolor);
   return (
     <article
       className="enlarged-image"
@@ -10,7 +9,7 @@ const Enlarged = ({ selectedPhoto, setBigPic }) => {
     >
       <img src={selectedPhoto.regular} alt={selectedPhoto.description} />
       <button className="close-btn" onClick={() => setBigPic(false)}>
-        &#215;
+        <div className="close-btn-x">&#215;</div>
       </button>
     </article>
   );
