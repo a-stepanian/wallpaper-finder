@@ -7,13 +7,20 @@ const Form = ({
   orientation,
   search,
   lastSearch,
-  getPhoto,
+  setLoading,
 }) => {
   const handlePortraitClick = () => {
+    // If there are already image tiles displayed, show loading component.
+    if (lastSearch) {
+      setLoading(true);
+    }
     setSearch(lastSearch);
     setOrientation("portrait");
   };
   const handleLandscapeClick = () => {
+    if (lastSearch) {
+      setLoading(true);
+    }
     setSearch(lastSearch);
     setOrientation("landscape");
   };

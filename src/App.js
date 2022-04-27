@@ -3,6 +3,7 @@ import { createApi } from "unsplash-js";
 import Form from "./Form";
 import Photos from "./Photos";
 import Enlarged from "./Enlarged";
+import Loading from "./Loading";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -45,13 +46,12 @@ function App() {
       return { description, id, regular, small, thumb, color, likes };
     });
     setPhotos(newPhotoArray);
-
-    const photoWindow = document.querySelector(".photo-section");
-    photoWindow.scrollTo(0, 0);
+    setLoading(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     setLastSearch(search);
     getPhoto();
   };
@@ -67,12 +67,17 @@ function App() {
       </h1>
 
       <main>
-        <Photos
-          photos={photos}
-          setSelectedPhoto={setSelectedPhoto}
-          setBigPic={setBigPic}
-          orientation={orientation}
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <Photos
+            photos={photos}
+            setSelectedPhoto={setSelectedPhoto}
+            setBigPic={setBigPic}
+            orientation={orientation}
+          />
+        )}
+
         {bigPic && (
           <Enlarged selectedPhoto={selectedPhoto} setBigPic={setBigPic} />
         )}
@@ -83,7 +88,7 @@ function App() {
           orientation={orientation}
           setOrientation={setOrientation}
           lastSearch={lastSearch}
-          getPhoto={getPhoto}
+          setLoading={setLoading}
         />
       </main>
     </>
