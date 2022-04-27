@@ -1,12 +1,18 @@
 import React from "react";
 
-const Photos = ({ photos, setSelectedPhoto, setBigPic }) => {
+const Photos = ({ photos, setSelectedPhoto, setBigPic, orientation }) => {
   const handleClick = (photo) => {
     setSelectedPhoto(photo);
     setBigPic(true);
   };
   return (
-    <section className="photo-section">
+    <section
+      className="photo-section"
+      style={{
+        gridTemplateColumns:
+          orientation === "portrait" ? "33% 33% 33%" : "50% 50%",
+      }}
+    >
       {photos.map((photo, index) => {
         return (
           <button

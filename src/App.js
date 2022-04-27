@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createApi } from "unsplash-js";
 import Form from "./Form";
 import Photos from "./Photos";
@@ -7,6 +7,7 @@ import Enlarged from "./Enlarged";
 function App() {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [lastSearch, setLastSearch] = useState("");
   const [photos, setPhotos] = useState([]);
   const [orientation, setOrientation] = useState("portrait");
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -23,7 +24,6 @@ function App() {
       orientation,
     });
     const photoArray = response.response.results;
-    console.log(photoArray[0]);
     const newPhotoArray = photoArray.map((photo) => {
       let { description, id, color, likes } = photo;
       let { regular, small, thumb } = photo.urls;
@@ -46,14 +46,19 @@ function App() {
     });
     setPhotos(newPhotoArray);
 
-    const photoWindow = document.querySelector("section");
+    const photoWindow = document.querySelector(".photo-section");
     photoWindow.scrollTo(0, 0);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLastSearch(search);
     getPhoto();
   };
+
+  useEffect(() => {
+    getPhoto();
+  }, [orientation]);
 
   return (
     <>
@@ -66,6 +71,7 @@ function App() {
           photos={photos}
           setSelectedPhoto={setSelectedPhoto}
           setBigPic={setBigPic}
+          orientation={orientation}
         />
         {bigPic && (
           <Enlarged selectedPhoto={selectedPhoto} setBigPic={setBigPic} />
@@ -76,6 +82,8 @@ function App() {
           handleSubmit={handleSubmit}
           orientation={orientation}
           setOrientation={setOrientation}
+          lastSearch={lastSearch}
+          getPhoto={getPhoto}
         />
       </main>
     </>

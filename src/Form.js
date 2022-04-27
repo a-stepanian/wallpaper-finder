@@ -6,18 +6,29 @@ const Form = ({
   setOrientation,
   orientation,
   search,
+  lastSearch,
+  getPhoto,
 }) => {
+  const handlePortraitClick = () => {
+    setSearch(lastSearch);
+    setOrientation("portrait");
+  };
+  const handleLandscapeClick = () => {
+    setSearch(lastSearch);
+    setOrientation("landscape");
+  };
+
   return (
     <section className="search-form">
       <div className="orientation">
         <button
-          onClick={() => setOrientation("portrait")}
+          onClick={handlePortraitClick}
           className={orientation === "portrait" ? "toggle selected" : "toggle"}
         >
           <div className="portrait">&#9645; </div>&nbsp;portrait
         </button>
         <button
-          onClick={() => setOrientation("landscape")}
+          onClick={handleLandscapeClick}
           className={orientation === "landscape" ? "toggle selected" : "toggle"}
         >
           <div className="landscape">&#9645;</div>&nbsp;landscape
