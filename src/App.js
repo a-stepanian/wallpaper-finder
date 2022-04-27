@@ -57,7 +57,10 @@ function App() {
 
   return (
     <>
-      <h1>Wallpaper Finder</h1>
+      <h1>
+        <a href="/">Wallpaper Finder</a>
+      </h1>
+
       <main>
         <Photos
           photos={photos}

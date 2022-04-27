@@ -6,7 +6,7 @@ const Photos = ({ photos, setSelectedPhoto, setBigPic }) => {
     setBigPic(true);
   };
   return (
-    <section>
+    <section className="photo-section">
       {photos.map((photo, index) => {
         return (
           <button
@@ -17,7 +17,7 @@ const Photos = ({ photos, setSelectedPhoto, setBigPic }) => {
             }}
             onClick={() => handleClick(photo)}
           >
-            <img src={photo.small} alt={photo.name} />
+            <img src={photo.thumb} alt={photo.name} />
             <div
               className="likes"
               style={{ backgroundColor: `${photo.color}` }}

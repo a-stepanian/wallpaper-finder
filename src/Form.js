@@ -8,19 +8,19 @@ const Form = ({
   search,
 }) => {
   return (
-    <>
+    <section className="search-form">
       <div className="orientation">
         <button
           onClick={() => setOrientation("portrait")}
-          className={orientation === "portrait" ? "selected" : null}
+          className={orientation === "portrait" ? "toggle selected" : "toggle"}
         >
-          portrait
+          <div className="portrait">&#9645; </div>&nbsp;portrait
         </button>
         <button
           onClick={() => setOrientation("landscape")}
-          className={orientation === "landscape" ? "selected" : null}
+          className={orientation === "landscape" ? "toggle selected" : "toggle"}
         >
-          landscape
+          <div className="landscape">&#9645;</div>&nbsp;landscape
         </button>
       </div>
 
@@ -32,16 +32,17 @@ const Form = ({
           name="search"
           autoComplete="off"
           value={search}
+          placeholder="Search"
           onChange={(e) => {
             setSearch(e.target.value);
           }}
         />
 
         <button type="submit" className="go-btn">
-          Go
+          <div className="mag">&#x1F50E;&#xFE0E;</div>
         </button>
       </form>
-    </>
+    </section>
   );
 };
 
