@@ -22,17 +22,23 @@ const Photos = ({ photos, setSelectedPhoto, setBigPic, orientation }) => {
   };
 
   useEffect(() => {
-    if (orientation === "portrait" && viewportWidth < 1000) {
+    if (orientation === "portrait" && viewportWidth < 768) {
       setColumnSchema("33% 33% 33%");
     }
-    if (orientation === "portrait" && viewportWidth >= 1000) {
+    if (orientation === "portrait" && viewportWidth >= 768) {
       setColumnSchema("25% 25% 25% 25%");
     }
-    if (orientation === "landscape" && viewportWidth < 1000) {
+    if (orientation === "portrait" && viewportWidth >= 1024) {
+      setColumnSchema("20% 20% 20% 20% 20%");
+    }
+    if (orientation === "landscape" && viewportWidth < 768) {
       setColumnSchema("50% 50%");
     }
-    if (orientation === "landscape" && viewportWidth >= 1000) {
+    if (orientation === "landscape" && viewportWidth >= 768) {
       setColumnSchema("33% 33% 33%");
+    }
+    if (orientation === "landscape" && viewportWidth >= 1024) {
+      setColumnSchema("25% 25% 25% 25%");
     }
   }, [viewportWidth]);
 
