@@ -109,7 +109,8 @@ input {
     text-align: center;
     border: none;
     border-left: 4px solid rgb(196, 196, 219);
-    color: rgb(20, 20, 40)
+    border-radius: 0;
+    color: rgb(20, 20, 40);
 }
 input:focus {
     outline: none;
