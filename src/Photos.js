@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 const Photos = ({ photos, setSelectedPhoto, setBigPic, orientation }) => {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [columnSchema, setColumnSchema] = useState(null);
+  const [tileDims, setTileDims] = useState(["125px", "200px"]);
 
   // Set the viewport width state when the window is resized
   useEffect(() => {
@@ -13,14 +14,13 @@ const Photos = ({ photos, setSelectedPhoto, setBigPic, orientation }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  //
-
   // Open the enlarged photo modal when the photo is clicked
   const handleClick = (photo) => {
     setSelectedPhoto(photo);
     setBigPic(true);
   };
 
+  // Set the number of grid columns when viewport width is changed
   useEffect(() => {
     if (orientation === "portrait" && viewportWidth < 768) {
       setColumnSchema("33% 33% 33%");
@@ -42,33 +42,60 @@ const Photos = ({ photos, setSelectedPhoto, setBigPic, orientation }) => {
     }
   }, [viewportWidth]);
 
+  // Set tile dimensions when orientation/viewport is changed
+  useEffect(() => {
+    if (orientation === "portrait" && viewportWidth < 480) {
+      setTileDims(["80px", "130px"]);
+    }
+    if (orientation === "portrait" && viewportWidth >= 480) {
+      setTileDims(["125px", "200px"]);
+    }
+    if (orientation === "landscape" && viewportWidth < 480) {
+      setTileDims(["130px", "80px"]);
+    }
+    if (orientation === "landscape" && viewportWidth >= 480) {
+      setTileDims(["200px", "125px"]);
+    }
+  }, [orientation, viewportWidth]);
+
+  // Scroll to Top function
+  const scrollUp = () => {
+    const container = document.querySelector(".photo-section");
+    container.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <section
-      className="photo-section"
-      style={{
-        gridTemplateColumns: columnSchema,
-      }}
-    >
-      {photos.map((photo, index) => {
-        return (
-          <button
-            className="image-card"
-            key={index}
-            style={{
-              backgroundColor: `${photo.color}`,
-            }}
-            onClick={() => handleClick(photo)}
-          >
-            <img src={photo.thumb} alt={photo.name} />
-            <div
-              className="likes"
-              style={{ backgroundColor: `${photo.color}` }}
+    <section className="photo-section">
+      <section
+        className="photo-grid"
+        style={{
+          gridTemplateColumns: columnSchema,
+        }}
+      >
+        {photos.map((photo, index) => {
+          return (
+            <button
+              className="image-card"
+              key={index}
+              onClick={() => handleClick(photo)}
+              style={{
+                background: `url(${photo.thumb})`,
+                height: tileDims[1],
+                width: tileDims[0],
+              }}
             >
-              <span className="heart">&#9825;</span> {photo.likes}
-            </div>
-          </button>
-        );
-      })}
+              <div className="likes">
+                <span className="heart">&#9825;</span> {photo.likes}
+              </div>
+            </button>
+          );
+        })}
+      </section>
+      {photos.length > 0 && (
+        <button className="backToTop" onClick={scrollUp}>
+          Back to Top
+        </button>
+      )}
     </section>
   );
 };

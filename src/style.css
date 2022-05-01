@@ -98,6 +98,7 @@ main {
 /* Search bar and button */
 form {
     display: flex;
+    border-radius: 0 5px 5px 0;
 }
 input {
     width: calc(100vw - 190px);
@@ -116,6 +117,9 @@ input:focus {
     outline: none;
     border: 4px solid rgb(218, 166, 94);
     border-right: none;
+}
+form:focus-within {
+    box-shadow: 0 0 5px white;
 }
 .mag {
     transform: rotate(-90deg);
@@ -151,6 +155,11 @@ input:focus {
     position: fixed;
     top: 60px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.photo-grid {
     display: grid;
 }
 .image-card {
@@ -158,33 +167,47 @@ input:focus {
     margin: 10px;
     border: none;
     border-radius: 5px;
+    background-color: rgba(196, 196, 219, 0.1);
+    display: flex;
+    align-items: flex-start;
 }
 .image-card img {
-    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
     border-radius: 5px;
-    transform: scale(0.95);
-    transition: 0.3s;
 }
 .image-card:hover {
     cursor: pointer;
 }
-.image-card:hover img {
-    transform: scale(1);
-}
 .likes {
     position: absolute;
-    bottom: 3px;
-    left: 3px;
+    bottom: 0;
+    left: 0;
     line-height: 20px;
     width: 60px;
     color: rgb(10, 10, 20);
+    background-color: rgba(196, 196, 219, 0.3);
     text-align: center;
     font-size: 1rem;
     font-weight: 500;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 .heart {
     font-weight: 900;
+}
+
+
+/* Back to Top button */
+.backToTop {
+    width: 200px;
+    line-height: 100px;
+    border: none;
+    background-color: transparent;
+    color: rgb(196, 196, 219);
+    font-size: 2rem;
+}
+.backToTop:hover {
+    cursor: pointer;
 }
 
 
@@ -270,7 +293,7 @@ input:focus {
 /* Media queries */
 @media (min-width: 480px) {
     .image-card {
-        margin: 20px;
+        margin: 2vw;
     }
     .photo-section {
         padding-left: 5%;
