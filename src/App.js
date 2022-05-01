@@ -19,15 +19,16 @@ function App() {
   });
 
   const getPhoto = async () => {
-    const response = await unsplash.search.getPhotos({
+    // Get first batch of 30 photos
+    const response1 = await unsplash.search.getPhotos({
       query: search,
       perPage: 30,
       orientation,
     });
-    const photoArray = response.response.results;
-    const newPhotoArray = photoArray.map((photo) => {
+    const photoArray1 = response1.response.results;
+    const newPhotoArray1 = photoArray1.map((photo) => {
       let { description, id, color, likes } = photo;
-      let { regular, small, thumb } = photo.urls;
+      let { regular, thumb } = photo.urls;
       if (!description) {
         description = "A beautiful sunny day.";
       }
@@ -35,17 +36,38 @@ function App() {
         regular =
           "https://images.unsplash.com/reserve/bOvf94dPRxWu0u3QsPjF_tree.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1000&q=60";
       }
-      if (!small) {
-        small =
+      if (!thumb) {
+        thumb =
+          "https://images.unsplash.com/reserve/bOvf94dPRxWu0u3QsPjF_tree.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1000&q=60";
+      }
+      return { description, id, regular, thumb, color, likes };
+    });
+
+    // Get second batch of 30 photos
+    const response2 = await unsplash.search.getPhotos({
+      query: search,
+      perPage: 30,
+      orientation,
+    });
+    const photoArray2 = response2.response.results;
+    const newPhotoArray2 = photoArray2.map((photo) => {
+      let { description, id, color, likes } = photo;
+      let { regular, thumb } = photo.urls;
+      if (!description) {
+        description = "A beautiful sunny day.";
+      }
+      if (!regular) {
+        regular =
           "https://images.unsplash.com/reserve/bOvf94dPRxWu0u3QsPjF_tree.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1000&q=60";
       }
       if (!thumb) {
         thumb =
           "https://images.unsplash.com/reserve/bOvf94dPRxWu0u3QsPjF_tree.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHJlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1000&q=60";
       }
-      return { description, id, regular, small, thumb, color, likes };
+      return { description, id, regular, thumb, color, likes };
     });
-    setPhotos(newPhotoArray);
+
+    setPhotos([...newPhotoArray1, ...newPhotoArray2]);
     setLoading(false);
   };
 

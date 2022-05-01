@@ -80,6 +80,8 @@ const Photos = ({ photos, setSelectedPhoto, setBigPic, orientation }) => {
               onClick={() => handleClick(photo)}
               style={{
                 background: `url(${photo.thumb})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 height: tileDims[1],
                 width: tileDims[0],
               }}
