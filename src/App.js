@@ -47,6 +47,7 @@ function App() {
     const response2 = await unsplash.search.getPhotos({
       query: search,
       perPage: 30,
+      page: 2,
       orientation,
     });
     const photoArray2 = response2.response.results;
