@@ -181,6 +181,7 @@ form:focus-within {
     position: fixed;
     top: 60px;
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
