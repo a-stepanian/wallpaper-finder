@@ -4,7 +4,7 @@
 
 Check out the website:
 
-https://wallpaper-finder.herokuapp.com/
+https://minimal-wallpaper-finder.netlify.app/
 
 ## Screenshots
 
