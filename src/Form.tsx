@@ -1,5 +1,17 @@
 import React from "react";
 
+type Orientation = "landscape" | "portrait" | "squarish";
+
+type Props = {
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setOrientation: React.Dispatch<React.SetStateAction<Orientation>>;
+  orientation: Orientation;
+  search: string;
+  lastSearch: string;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 const Form = ({
   handleSubmit,
   setSearch,
@@ -8,7 +20,7 @@ const Form = ({
   search,
   lastSearch,
   setLoading,
-}) => {
+}: Props): JSX.Element => {
   const handlePortraitClick = () => {
     // If there are already image tiles displayed, show loading component.
     if (lastSearch) {

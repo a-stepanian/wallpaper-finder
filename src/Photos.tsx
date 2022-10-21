@@ -1,9 +1,32 @@
 import React, { useState, useEffect } from "react";
 
-const Photos = ({ photos, setSelectedPhoto, setBigPic, orientation }) => {
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-  const [columnSchema, setColumnSchema] = useState(null);
-  const [tileDims, setTileDims] = useState(["125px", "200px"]);
+interface Photo {
+  description: string;
+  id: string;
+  regular: string;
+  thumb: string;
+  color: string;
+  likes: number;
+}
+
+type Orientation = "landscape" | "portrait" | "squarish";
+
+type Props = {
+  photos: Photo[];
+  setSelectedPhoto: React.Dispatch<React.SetStateAction<Photo>>;
+  setBigPic: React.Dispatch<React.SetStateAction<boolean>>;
+  orientation: Orientation;
+};
+
+const Photos = ({
+  photos,
+  setSelectedPhoto,
+  setBigPic,
+  orientation,
+}: Props): JSX.Element => {
+  const [viewportWidth, setViewportWidth] = useState<number>(window.innerWidth);
+  const [columnSchema, setColumnSchema] = useState<string>("");
+  const [tileDims, setTileDims] = useState<string[]>(["125px", "200px"]);
 
   // Set the viewport width state when the window is resized
   useEffect(() => {
@@ -15,7 +38,7 @@ const Photos = ({ photos, setSelectedPhoto, setBigPic, orientation }) => {
   }, []);
 
   // Open the enlarged photo modal when the photo is clicked
-  const handleClick = (photo) => {
+  const handleClick = (photo: Photo) => {
     setSelectedPhoto(photo);
     setBigPic(true);
   };
@@ -61,7 +84,9 @@ const Photos = ({ photos, setSelectedPhoto, setBigPic, orientation }) => {
   // Scroll to Top function
   const scrollUp = () => {
     const container = document.querySelector(".photo-section");
-    container.scrollTo({ top: 0, behavior: "smooth" });
+    if (container) {
+      container.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (

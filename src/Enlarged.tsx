@@ -1,6 +1,20 @@
 import React from "react";
 
-const Enlarged = ({ selectedPhoto, setBigPic }) => {
+interface Photo {
+  description: string;
+  id: string;
+  regular: string;
+  thumb: string;
+  color: string;
+  likes: number;
+}
+
+type Props = {
+  selectedPhoto: Photo;
+  setBigPic: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const Enlarged = ({ selectedPhoto, setBigPic }: Props): JSX.Element => {
   const backcolor = selectedPhoto.color + "dd";
   return (
     <article
@@ -14,5 +28,3 @@ const Enlarged = ({ selectedPhoto, setBigPic }) => {
     </article>
   );
 };
-
-export default Enlarged;
